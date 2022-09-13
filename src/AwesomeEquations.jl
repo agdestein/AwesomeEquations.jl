@@ -5,7 +5,7 @@ include("dual.jl")
 include("differentiation.jl")
 
 export forward_euler, rk4
-export finite_diff, forward_diff
+export Dual, finite_diff, forward_diff
 
 end
 
