@@ -35,6 +35,7 @@ function rk4(f, u0, T, dt = 0.1)
         u = u + dt * (k1 / 6 + k2 / 3 + k3 / 3 + k4 / 6)
         t + dt
     end
+    println("Hey, this is awesome!")
     return u
 end
 
