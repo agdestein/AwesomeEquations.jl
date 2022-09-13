@@ -25,5 +25,11 @@ using Test
             @test rk4(g, u₀, t, 1e-4) ≈ u_g rtol = 1e-3
         end
     end
+
+    @testset "Differentiaton" begin
+        @test finite_diff(x -> x^2, 3.0) ≈ 6.0 rtol = 1e-8
+        @test finite_diff(sin, 1.0) ≈ cos(1.0) rtol = 1e-8
+        @test finite_diff(exp, 1.0) ≈ exp(1.0) rtol = 1e-8
+    end
 end
 
