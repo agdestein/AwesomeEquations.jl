@@ -4,9 +4,9 @@
 Dual number with value `a` and derivative `b`.
 
 A dual number ``x = a + b \\epsilon`` is defined such that ``\\epsilon^2 = 0``
-and ``f(a + b \\epsilon) = f(a) + f'(a) b \epsilon`` for all ``f``. The
-derivative of a function is thus given by ``f'(a) = y`` when ``f(a + \epsilon)
-= x + y \epsilon``.
+and ``f(a + b \\epsilon) = f(a) + f'(a) b \\epsilon`` for all ``f``. The
+derivative of a function is thus given by ``f'(a) = y`` when ``f(a + \\epsilon)
+= x + y \\epsilon``.
 """
 struct Dual{T} <: Number
     val::T
