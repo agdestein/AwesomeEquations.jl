@@ -12,9 +12,9 @@ function forward_euler(f, u0, T, dt = 0.1)
     t = 0.0
     for i = 1:n
         u = u + dt * f(u, t)
-        t + dt
+        t = t + dt
     end
-    return u
+    u
 end
 
 """
@@ -33,9 +33,9 @@ function rk4(f, u0, T, dt = 0.1)
         k3 = f(u + dt * k2, t + dt/2)
         k4 = f(u + dt * k3, t + dt)
         u = u + dt * (k1 / 6 + k2 / 3 + k3 / 3 + k4 / 6)
-        t + dt
+        t = t + dt
     end
-    return u
+    u
 end
 
 export forward_euler, rk4
