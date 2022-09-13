@@ -8,8 +8,8 @@ using Test
 
         u₀ = 2.0
         t = 3.0
-        u_f = exp(t) * u0
-        u_g = exp(-t^2 / 2) * u0
+        u_f = exp(t) * u₀
+        u_g = exp(-t^2 / 2) * u₀
         p = nothing
 
         @testset "Forward Euler" begin
