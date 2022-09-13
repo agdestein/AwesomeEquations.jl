@@ -20,6 +20,7 @@ Base.promote(d::Dual, x) = (d, Dual(x, zero(x)))
 # Add common mathematical operations to Dual numbers
 Base.:+(a::Dual, b::Dual) = Dual(a.val + b.val, a.der + b.der)
 Base.:-(a::Dual, b::Dual) = Dual(a.val - b.val, a.der - b.der)
+Base.:-(a::Dual) = Dual(-a.val, -a.der)
 Base.:*(a::Dual, b::Dual) =
     Dual(a.val * b.val, a.val * b.der + a.der * b.val)
 Base.:/(a::Dual, b::Dual) = Dual(

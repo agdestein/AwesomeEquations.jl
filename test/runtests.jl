@@ -13,18 +13,19 @@ using Test
         p = nothing
 
         @testset "Forward Euler" begin
-            @test forward_euler(f, p, u₀, t, 1e-4) ≈ u_f rtol = 1e-3
-            @test forward_euler(f, p, u₀, t, 1e-5) ≈ u_f rtol = 1e-4
-            @test forward_euler(g, p, u₀, t, 1e-4) ≈ u_g rtol = 1e-3
-            @test forward_euler(g, p, u₀, t, 1e-5) ≈ u_g rtol = 1e-4
+            @test forward_euler(f, u₀, p, t, 1e-4) ≈ u_f rtol = 1e-3
+            @test forward_euler(f, u₀, p, t, 1e-5) ≈ u_f rtol = 1e-4
+            @test forward_euler(g, u₀, p, t, 1e-4) ≈ u_g rtol = 1e-3
+            @test forward_euler(g, u₀, p, t, 1e-5) ≈ u_g rtol = 1e-4
         end
 
         @testset "RK4" begin
-            @test rk4(f, p, u₀, t, 1e-3) ≈ u_f rtol = 1e-3
-            @test rk4(f, p, u₀, t, 1e-4) ≈ u_f rtol = 1e-4
-            @test rk4(g, p, u₀, t, 1e-3) ≈ u_g rtol = 1e-2
-            @test rk4(g, p, u₀, t, 1e-4) ≈ u_g rtol = 1e-3
+            @test rk4(f, u₀, p, t, 1e-1) ≈ u_f rtol = 1e-3
+            @test rk4(f, u₀, p, t, 1e-2) ≈ u_f rtol = 1e-4
+            @test rk4(g, u₀, p, t, 1e-1) ≈ u_g rtol = 1e-3
+            @test rk4(g, u₀, p, t, 1e-2) ≈ u_g rtol = 1e-4
         end
+
     end
 
     @testset "Differentiaton" begin
@@ -48,13 +49,14 @@ using Test
         u₀ = 2.0
         t = 3.0
         p = 1.3
+        dudp = -t * exp(-p * t) * u₀
 
         # Differentiate forward Euler
-        solve = p -> forward_euler(f, u₀, p, t)
-        @test forward_diff(solve, p) ≈ finite_diff(solve, p) rtol = 1e-8
+        solve = p -> forward_euler(f, u₀, p, t, 1e-4)
+        @test forward_diff(solve, p) ≈ dudp rtol = 1e-3
 
-        # Differentiate RK4
-        solve = p -> rk4(f, u₀, p, t)
-        @test forward_diff(solve, p) ≈ finite_diff(solve, p) rtol = 1e-7
+        # Differentiate RK4 (very accurate)
+        solve = p -> rk4(f, u₀, p, t, 1e-4)
+        @test forward_diff(solve, p) ≈ dudp rtol = 1e-14
     end
 end
