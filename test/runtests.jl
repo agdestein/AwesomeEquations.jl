@@ -30,6 +30,13 @@ using Test
         @test finite_diff(x -> x^2, 3.0) ≈ 6.0 rtol = 1e-8
         @test finite_diff(sin, 1.0) ≈ cos(1.0) rtol = 1e-8
         @test finite_diff(exp, 1.0) ≈ exp(1.0) rtol = 1e-8
+
+        @test forward_diff(x -> x^2, 3.0) ≈ 6.0 rtol = 1e-8
+        @test forward_diff(sin, 1.0) ≈ cos(1.0) rtol = 1e-8
+        @test forward_diff(exp, 1.0) ≈ exp(1.0) rtol = 1e-8
+
+        # Check that chain rule works correctly
+        h(x) = exp(2 * sin(3x)^(1 / x + 4))
+        @test forward_diff(h, 1.0) ≈ finite_diff(h, 1.0) rtol = 1e-7
     end
 end
-
